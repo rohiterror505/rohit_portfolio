@@ -1457,7 +1457,7 @@
             <div class="about-container">
             <div class="about-image-column" data-aos="zoom-in-right" data-aos-duration="700" data-aos-easing="ease-out-circ">
                 <div class="about-profile-picture">
-                <img src="assets/images/profile1.png" alt="Rohit Kumar - Full Stack Developer">
+                <img src="assets/images/photo3.png" alt="Rohit Kumar - Full Stack Developer">
                 </div>
             </div>
             <div class="about-text-column" data-aos="zoom-in-left" data-aos-duration="700" data-aos-delay="150" data-aos-easing="ease-out-circ">
@@ -1822,37 +1822,91 @@
         if (scrollTopBtn) {
           scrollTopBtn.addEventListener('click', (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
         }
+        
+        // --- Dynamic Title Logic ---
+        const originalDocumentTitle = "Rohit Kumar - Portfolio"; // Set your base title here
+        let currentSectionBasedTitle = originalDocumentTitle;
+        let lastKnownSectionId = 'hero'; // Default
 
         const sections = document.querySelectorAll('section[id]');
-        const navLinksJS = document.querySelectorAll('.site-header .nav-list li a');
-        function changeActiveLink() {
-          let index = sections.length;
-          let headerOffset = 0;
-          if (siteHeader && getComputedStyle(siteHeader).position === 'fixed') headerOffset += siteHeader.offsetHeight;
-          if (progressBarGlobal && getComputedStyle(progressBarGlobal).position === 'fixed') headerOffset += progressBarGlobal.offsetHeight;
-          headerOffset += 80; 
+        const navLinksForTitle = document.querySelectorAll('.site-header .nav-list li a'); // Use this for nav active state if needed
 
-          while(--index >= 0 && window.scrollY + headerOffset < sections[index].offsetTop) {}
-
-          navLinksJS.forEach((link) => link.classList.remove('active'));
-
-          if (index >= 0 && sections[index] && sections[index].id) {
-            const activeLink = document.querySelector(`.site-header .nav-list li a[href="#${sections[index].id}"]`);
-            if (activeLink) activeLink.classList.add('active');
-          } else if (window.scrollY < (sections[0] && sections[0].offsetTop ? sections[0].offsetTop - headerOffset : 400)) {
-             const homeLink = Array.from(navLinksJS).find(link => link.getAttribute('href') === 'index.html' || link.getAttribute('href') === '#hero');
-             if (homeLink) homeLink.classList.add('active');
-          }
+        function formatSectionNameForTitle(sectionId) {
+            if (!sectionId) return 'Home'; 
+            if (sectionId.toLowerCase() === 'hero') return 'Home';
+            let name = sectionId.replace(/-/g, ' ');
+            // Capitalize first letter of each word
+            name = name.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+            return name;
         }
-        if (sections.length > 0) {
-            changeActiveLink(); 
-            window.addEventListener('scroll', changeActiveLink);
-        } else {
-            const homeLink = Array.from(navLinksJS).find(link => link.getAttribute('href') === 'index.html' || link.getAttribute('href') === '#hero');
-            if (homeLink) homeLink.classList.add('active');
+        
+        function updateDocumentTitle(sectionId) {
+            lastKnownSectionId = sectionId || 'hero'; 
+            const sectionName = formatSectionNameForTitle(lastKnownSectionId);
+            currentSectionBasedTitle = `Rohit Kumar - ${sectionName}`;
+
+            if (document.hasFocus()) {
+                document.title = currentSectionBasedTitle;
+            }
         }
 
+        function handleScrollAndTitleUpdate() {
+            let currentActiveSectionId = 'hero'; 
+            let headerOffset = 0;
+            if (siteHeader && getComputedStyle(siteHeader).position === 'fixed') headerOffset += siteHeader.offsetHeight;
+            if (progressBarGlobal && getComputedStyle(progressBarGlobal).position === 'fixed') headerOffset += progressBarGlobal.offsetHeight;
+            headerOffset += 80; 
 
+            let highestVisibleSectionIndex = -1;
+
+            for (let i = sections.length - 1; i >= 0; i--) {
+                const section = sections[i];
+                const rect = section.getBoundingClientRect();
+                if (rect.top <= headerOffset + (window.innerHeight * 0.3) && rect.bottom >= headerOffset + (window.innerHeight*0.1) ) { // Check if section top is within reasonable viewport part
+                    currentActiveSectionId = section.id;
+                    highestVisibleSectionIndex = i;
+                    break; 
+                }
+            }
+            
+            // If scrolled to the very top, or no other section is determined as active
+            if (window.scrollY < (sections[0] ? sections[0].offsetTop - headerOffset : 200) && highestVisibleSectionIndex === -1) {
+                 currentActiveSectionId = 'hero';
+            }
+
+
+            // Update nav active state (re-using existing logic structure)
+            navLinksForTitle.forEach(link => link.classList.remove('active'));
+            const activeNavLink = document.querySelector(`.site-header .nav-list li a[href="#${currentActiveSectionId}"]`);
+            if (activeNavLink) {
+                activeNavLink.classList.add('active');
+            } else if (currentActiveSectionId === 'hero') { // Fallback for hero/home link
+                 const homeLink = Array.from(navLinksForTitle).find(link => link.getAttribute('href') === 'index.html' || link.getAttribute('href') === '#hero');
+                 if (homeLink) homeLink.classList.add('active');
+            }
+            
+            updateDocumentTitle(currentActiveSectionId);
+        }
+        
+        // Initial setup on load
+        const initialHashForTitle = window.location.hash.substring(1);
+        if (initialHashForTitle && document.getElementById(initialHashForTitle)) {
+            lastKnownSectionId = initialHashForTitle; 
+        }
+        handleScrollAndTitleUpdate(); 
+        window.addEventListener('scroll', handleScrollAndTitleUpdate);
+
+        // Tab focus/blur for title change
+        window.addEventListener('blur', () => {
+            document.title = "🙏 Come back to Portfolio ";
+        });
+
+        window.addEventListener('focus', () => {
+            updateDocumentTitle(lastKnownSectionId); // Use the last known section to set the title
+        });
+
+
+        // --- Particle JS --- (tsParticles)
         if (typeof tsParticles !== "undefined") {
           const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--accent-vibrant').trim();
           const secondaryColor = getComputedStyle(document.documentElement).getPropertyValue('--secondary-vibrant').trim();
