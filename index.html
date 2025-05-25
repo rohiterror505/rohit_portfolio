@@ -1269,7 +1269,7 @@
         display: flex; align-items: center; justify-content: center;
         font-size: clamp(1rem, 4vw, 1.4rem); 
         box-shadow: 0 8px 20px rgba(var(--rgb-accent-vibrant),0.3); 
-        z-index: 999;
+        z-index: 999; 
         opacity: 0; visibility: hidden;
         transform: translateY(20px) scale(0.7); 
         transition: all 0.4s var(--ease-out-back); 
@@ -1283,6 +1283,31 @@
         transform: translateY(-7px) scale(1.2) rotate(20deg) translateZ(25px); 
         box-shadow: 0 12px 30px rgba(var(--rgb-accent-vibrant),0.5);
       }
+
+      footer .whatsapp-float {
+        position: fixed;
+        bottom: 30px;
+        left: 30px; 
+        width: clamp(45px, 10vw, 55px); 
+        height: clamp(45px, 10vw, 55px);
+        background-color: #25D366; 
+        color: #fff; 
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: clamp(1.5rem, 4vw, 1.8rem); 
+        box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4); 
+        z-index: 998; 
+        transition: all 0.4s var(--ease-out-back);
+      }
+
+      footer .whatsapp-float:hover {
+        background-color: #1DA851; 
+        transform: translateY(-7px) scale(1.2) rotate(-15deg) translateZ(25px);
+        box-shadow: 0 12px 30px rgba(37, 211, 102, 0.6);
+      }
+
 
       @keyframes rocketAnimate {
         0% { transform: translateY(0) rotate(0deg); }
@@ -1321,6 +1346,12 @@
                 padding: 0 10px;
                 margin-bottom: 25px;
             }
+
+            footer .whatsapp-float, footer .scroll-top {
+              bottom: 20px;
+            }
+            footer .whatsapp-float { left: 20px; }
+            footer .scroll-top { right: 20px; }
        }
 
     </style>
@@ -1372,7 +1403,8 @@
                 <div class="social-icons">
                 <a href="https://www.linkedin.com/in/rohit-kumar-bb5168206" target="_blank" aria-label="LinkedIn Profile" data-aos="fade-up" data-aos-delay="700" data-aos-anchor=".hero-text .name"><i class="fab fa-linkedin-in"></i></a>
                 <a href="https://github.com/rohiterror505" target="_blank" aria-label="GitHub Profile" data-aos="fade-up" data-aos-delay="800" data-aos-anchor=".hero-text .name"><i class="fab fa-github"></i></a>
-                <a href="mailto:rohit24955@gmail.com" aria-label="Send an Email" data-aos="fade-up" data-aos-delay="900" data-aos-anchor=".hero-text .name"><i class="fas fa-envelope"></i></a>
+                <!-- <a href="https://wa.me/918744044352" target="_blank" aria-label="WhatsApp" data-aos="fade-up" data-aos-delay="900" data-aos-anchor=".hero-text .name"><i class="fab fa-whatsapp"></i></a> -->
+                <a href="mailto:rohit24955@gmail.com" aria-label="Send an Email" data-aos="fade-up" data-aos-delay="1000" data-aos-anchor=".hero-text .name"><i class="fas fa-envelope"></i></a>
                 </div>
             </div>
             <div class="hero-image" data-aos="zoom-out-left" data-aos-easing="ease-out-cubic" data-aos-delay="500">
@@ -1431,6 +1463,7 @@
                 </div>
                 <div class="about-contact-info">
                 <p class="email"><i class="fas fa-envelope-open-text"></i><strong>Email :</strong> <a href="mailto:rohit24955@gmail.com">rohit24955@gmail.com</a></p>
+                <p class="whatsapp"><i class="fab fa-whatsapp"></i><strong>WhatsApp :</strong> <a href="https://wa.me/918744044352" target="_blank">+91 8744044352</a></p>
                 <p class="place"><i class="fas fa-map-marker-alt"></i><strong>Place :</strong> Delhi, India</p>
                 </div>
                 <a href="https://drive.google.com/file/d/1rUlgICjITbWK3g65Nriz62rrISXgPqN-/view?usp=sharing" class="resume-button btn about-resume-btn" target="_blank" rel="noopener noreferrer" data-aos="zoom-in-up" data-aos-delay="300" data-aos-anchor=".about-text-column">View My Resume <i class="fas fa-arrow-alt-circle-right"></i></a>
@@ -1661,7 +1694,8 @@
                  <div class="social-icons">
                    <a href="https://www.linkedin.com/in/rohit-kumar-bb5168206/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                    <a href="https://github.com/rohiterror505" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                   <a href="mailto:rohit24955@gmail.com" aria-label="Email Shobhit"><i class="fas fa-envelope"></i></a>
+                   <a href="https://wa.me/918744044352" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                   <a href="mailto:rohit24955@gmail.com" aria-label="Email Rohit Kumar"><i class="fas fa-envelope"></i></a>
       
                 </div>
              </div>
@@ -1682,6 +1716,10 @@
             <p class="designed-with">Designed & Developed With <span class="heart">❤️</span> By <span class="dev-name">Rohit Kumar</span> © <script>document.write(new Date().getFullYear())</script></p>
         </div>
         <a href="#" class="scroll-top" aria-label="Scroll to top"><i class="fas fa-arrow-up"></i></a>
+         <!-- WhatsApp Fixed Icon -->
+         <a href="https://wa.me/918744044352" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
     </footer>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
@@ -1994,7 +2032,7 @@
       });
     </script>
 
-    <!-- Start of Tawk.to Script-->
+    <!--Start of Tawk.to Script-->
     <script type="text/javascript">
     var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
     (function(){
@@ -2006,7 +2044,7 @@
     s0.parentNode.insertBefore(s1,s0);
     })();
     </script>
-    <!--End of Tawk.to Script -->
+    <!--End of Tawk.to Script-->
 
   </body>
 </html>
