@@ -1288,15 +1288,15 @@
         position: fixed;
         bottom: 30px;
         left: 30px; 
-        width: clamp(45px, 10vw, 55px); 
-        height: clamp(45px, 10vw, 55px);
+        width: clamp(50px, 10vw, 65px); /* Increased size */
+        height: clamp(50px, 10vw, 65px); /* Increased size */
         background-color: #25D366; 
         color: #fff; 
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: clamp(1.5rem, 4vw, 1.8rem); 
+        font-size: clamp(1.8rem, 5vw, 2.2rem); /* Increased icon font size */
         box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4); 
         z-index: 998; 
         transition: all 0.4s var(--ease-out-back);
@@ -1350,8 +1350,15 @@
             footer .whatsapp-float, footer .scroll-top {
               bottom: 20px;
             }
-            footer .whatsapp-float { left: 20px; }
-            footer .scroll-top { right: 20px; }
+            footer .whatsapp-float {
+              left: 20px; 
+              width: clamp(45px, 12vw, 55px); 
+              height: clamp(45px, 12vw, 55px);
+              font-size: clamp(1.6rem, 4.5vw, 2rem);
+            }
+            footer .scroll-top { 
+                right: 20px; 
+            }
        }
 
     </style>
@@ -1403,7 +1410,7 @@
                 <div class="social-icons">
                 <a href="https://www.linkedin.com/in/rohit-kumar-bb5168206" target="_blank" aria-label="LinkedIn Profile" data-aos="fade-up" data-aos-delay="700" data-aos-anchor=".hero-text .name"><i class="fab fa-linkedin-in"></i></a>
                 <a href="https://github.com/rohiterror505" target="_blank" aria-label="GitHub Profile" data-aos="fade-up" data-aos-delay="800" data-aos-anchor=".hero-text .name"><i class="fab fa-github"></i></a>
-                <!-- <a href="https://wa.me/918744044352" target="_blank" aria-label="WhatsApp" data-aos="fade-up" data-aos-delay="900" data-aos-anchor=".hero-text .name"><i class="fab fa-whatsapp"></i></a> -->
+                <!-- Removed WhatsApp from here as it's now a fixed floating icon -->
                 <a href="mailto:rohit24955@gmail.com" aria-label="Send an Email" data-aos="fade-up" data-aos-delay="1000" data-aos-anchor=".hero-text .name"><i class="fas fa-envelope"></i></a>
                 </div>
             </div>
