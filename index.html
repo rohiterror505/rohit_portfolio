@@ -321,7 +321,8 @@
         text-decoration: none;
         letter-spacing: 0.5px;
         transition: color 0.3s var(--ease-out-quad), transform 0.3s var(--ease-out-back), text-shadow 0.3s var(--ease-out-quad);
-        display: inline-block;
+        display: inline-flex; /* Changed to inline-flex for better alignment with icon */
+        align-items: center; /* Align icon and text vertically */
       }
       .site-header .nav-logo a.brand-name:hover {
         color: var(--accent-vibrant);
@@ -1302,7 +1303,7 @@
             .container { width: 95%; }
             .section-title, section > h2 { margin-bottom: 35px; padding-bottom: 12px;}
             .section-title::after, section > h2::after { width: 60px; height: 3px;}
-            .section-title:hover::after, section > h2:hover::after { width: 80px;}
+            .section-title:hover::after, section > h2::after { width: 80px;}
             
             #experience .experience-card { padding: 20px; }
             #experience .experience-card .company-logo { width: 45px; height: 45px; margin-right: 12px;}
@@ -1333,7 +1334,9 @@
     <nav class="site-header">
       <div class="nav-container">
         <div class="nav-logo">
-          <a href="index.html" class="brand-name">Rohit Kumar</a>
+          <a href="index.html" class="brand-name">
+            <i class="fas fa-laptop-code" style="margin-right: 8px; vertical-align: middle;"></i>Rohit Kumar
+          </a>
         </div>
         <button class="hamburger" aria-label="Toggle Navigation Menu" aria-expanded="false">
           <span></span>
@@ -1990,5 +1993,20 @@
         }
       });
     </script>
+
+    <!-- Start of Tawk.to Script-->
+    <script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/6832b424fa521d190891c9ea/1is30vc4t';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+    </script>
+    <!--End of Tawk.to Script -->
+
   </body>
 </html>
