@@ -1225,7 +1225,7 @@
         color: var(--text-color-hero-primary);
         transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, transform 0.3s var(--ease-out-quad);
         background-color: var(--contact-input-bg, rgba(var(--rgb-hero-background), 0.8));
-        box-sizing: border-box; /* ADDED THIS LINE */
+        box-sizing: border-box; /* THIS WAS THE FIX */
       }
 
       .contact-section .form-group > input::placeholder,
@@ -2374,7 +2374,13 @@
                 })
                 .then(data => {
                     if (data.success === "true" || data.success === true || data.success === "true_html_fallback") {
-                        window.location.href = 'thankyou.html'; 
+                        // Check the current theme
+                        const isLightTheme = document.documentElement.classList.contains('theme-light');
+                        if (isLightTheme) {
+                            window.location.href = 'thankyou-light.html';
+                        } else {
+                            window.location.href = 'thankyou-dark.html';
+                        }
                     } else {
                          throw new Error(data.message || "Form submission was not successful according to FormSubmit's response.");
                     }

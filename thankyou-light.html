@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Message Sent! (Light) | Rohit Kumar</title> <!-- Changed title -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Oxygen:wght@300;400;700&family=Rajdhani:wght@400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* Light Theme Variables */
+        :root {
+            --hero-background: #F0F4F8; /* Light Grayish Blue */
+            --card-background: #FFFFFF;
+            --text-color-primary: #1C2025; /* Dark Navy/Black */
+            --text-color-secondary: #525B66; /* Medium Gray */
+            --accent-vibrant: #007BFF; /* Bright Blue */
+            --secondary-vibrant: #E91E63; /* Pink */
+            --highlight-vibrant: #FFC107; /* Amber */
+            --primary-font: 'Roboto Condensed', 'Rajdhani', sans-serif;
+            --secondary-font: 'Oxygen', sans-serif;
+            --title-font: 'Orbitron', 'Rajdhani', sans-serif;
+            --border-radius-md: 10px;
+            --rgb-accent-vibrant: 0, 123, 255; /* RGB for Bright Blue */
+            --rgb-secondary-vibrant: 233, 30, 99; /* RGB for Pink */
+            --ease-out-back: cubic-bezier(0.175, 0.885, 0.320, 1.275);
+            --ease-out-cubic: cubic-bezier(0.215, 0.610, 0.355, 1);
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--secondary-font);
+            background-color: var(--hero-background);
+            color: var(--text-color-secondary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #tsparticles-thankyou {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .thank-you-wrapper {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .thank-you-card {
+            background-color: var(--card-background);
+            padding: 50px 40px;
+            border-radius: var(--border-radius-md);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1), /* Lighter shadow */
+                        0 0 0 1px rgba(var(--rgb-accent-vibrant), 0.2); /* Lighter border highlight */
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+            border: 1px solid rgba(var(--rgb-accent-vibrant), 0.15); /* Lighter border */
+            animation: fadeInCard 0.8s var(--ease-out-cubic) forwards;
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+            /* backdrop-filter: blur(5px); Optional for light theme, might not be as effective */
+            /* -webkit-backdrop-filter: blur(5px); */
+        }
+
+        @keyframes fadeInCard {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .success-icon-container {
+            margin-bottom: 25px;
+            animation: popInIcon 0.5s var(--ease-out-back) 0.5s forwards;
+            opacity: 0;
+            transform: scale(0.5);
+        }
+
+        @keyframes popInIcon {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .success-icon-container svg {
+            width: 80px;
+            height: 80px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .success-icon-container .circle {
+            stroke-dasharray: 264;
+            stroke-dashoffset: 264;
+            stroke: var(--accent-vibrant);
+            stroke-width: 3;
+            fill: none;
+            animation: drawCircle 0.6s var(--ease-out-cubic) 0.7s forwards;
+        }
+
+        .success-icon-container .checkmark {
+            stroke-dasharray: 60;
+            stroke-dashoffset: 60;
+            stroke: var(--accent-vibrant);
+            stroke-width: 4.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+            animation: drawCheckmark 0.4s var(--ease-out-cubic) 1.2s forwards;
+        }
+
+        @keyframes drawCircle {
+            to { stroke-dashoffset: 0; }
+        }
+
+        @keyframes drawCheckmark {
+            to { stroke-dashoffset: 0; }
+        }
+
+        .thank-you-card h1 {
+            font-family: var(--title-font);
+            color: var(--text-color-primary);
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(var(--rgb-accent-vibrant), 0.15); /* Lighter text shadow */
+            animation: slideInText 0.6s var(--ease-out-cubic) 0.8s forwards;
+            opacity: 0;
+            transform: translateY(15px);
+        }
+
+        .thank-you-card p {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            margin-bottom: 30px;
+            color: var(--text-color-secondary);
+            animation: slideInText 0.6s var(--ease-out-cubic) 1s forwards;
+            opacity: 0;
+            transform: translateY(15px);
+        }
+
+        @keyframes slideInText {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .return-button {
+            display: inline-block;
+            background-color: var(--accent-vibrant);
+            color: var(--card-background); /* Text color to match light card background */
+            padding: 12px 30px;
+            border-radius: var(--border-radius-md);
+            font-family: var(--primary-font);
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-size: 1rem;
+            border: 2px solid transparent;
+            transition: all 0.3s var(--ease-out-back);
+            animation: popInIcon 0.5s var(--ease-out-back) 1.3s forwards;
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        .return-button:hover {
+            background-color: transparent;
+            color: var(--accent-vibrant);
+            border-color: var(--accent-vibrant);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(var(--rgb-accent-vibrant), 0.2); /* Lighter shadow */
+        }
+        .return-button:active {
+             transform: translateY(-1px) scale(1.02);
+             box-shadow: 0 4px 10px rgba(var(--rgb-accent-vibrant), 0.15); /* Lighter shadow */
+        }
+
+        .return-button i {
+            margin-left: 8px;
+            transition: transform 0.3s var(--ease-out-back);
+        }
+        .return-button:hover i {
+            transform: translateX(5px);
+        }
+
+        @media (max-width: 600px) {
+            .thank-you-card {
+                padding: 40px 25px;
+            }
+            .thank-you-card h1 {
+                font-size: 2.2rem;
+            }
+            .thank-you-card p {
+                font-size: 1rem;
+            }
+            .return-button {
+                padding: 10px 25px;
+                font-size: 0.9rem;
+            }
+            .success-icon-container svg {
+                width: 60px;
+                height: 60px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div id="tsparticles-thankyou"></div>
+    <div class="thank-you-wrapper">
+        <div class="thank-you-card">
+            <div class="success-icon-container">
+                <svg viewBox="0 0 100 100">
+                    <circle class="circle" cx="50" cy="50" r="42"/>
+                    <polyline class="checkmark" points="30,50 45,65 70,35"/>
+                </svg>
+            </div>
+            <h1>Message Sent!</h1>
+            <p>Thank you for reaching out. Your message has been successfully delivered. I'll review it and get back to you as soon as possible.</p>
+            <a href="index.html" class="return-button">
+                Return to Portfolio <i class="fas fa-arrow-left"></i>
+            </a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof tsParticles !== "undefined") {
+                // These will now pick up the light theme CSS variables
+                const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--accent-vibrant').trim();
+                const secondaryColor = getComputedStyle(document.documentElement).getPropertyValue('--secondary-vibrant').trim();
+                const highlightColor = getComputedStyle(document.documentElement).getPropertyValue('--highlight-vibrant').trim();
+                const heroBgColor = getComputedStyle(document.documentElement).getPropertyValue('--hero-background').trim();
+
+                tsParticles.load("tsparticles-thankyou", {
+                    fpsLimit: 60,
+                    particles: {
+                        number: {
+                            value: 100, // Adjusted for potentially better performance/look on light
+                            density: {
+                                enable: true,
+                                area: 900
+                            }
+                        },
+                        color: {
+                            value: [accentColor, secondaryColor, highlightColor, "#333333"] // Darker particles on light bg
+                        },
+                        shape: {
+                            type: ["circle", "triangle"],
+                        },
+                        opacity: {
+                            value: {min: 0.3, max: 0.8},
+                            animation: {
+                                enable: true,
+                                speed: 1,
+                                minimumValue: 0.2,
+                                sync: false
+                            }
+                        },
+                        size: {
+                            value: {min: 1, max: 3.5},
+                            animation: {
+                                enable: true,
+                                speed: 4,
+                                minimumValue: 0.5,
+                                sync: false
+                            }
+                        },
+                        links: {
+                            color: "random",
+                            distance: 150,
+                            enable: true,
+                            opacity: 0.4,
+                            width: 1,
+                             triangles: {
+                                enable: true,
+                                frequency: 0.05,
+                                opacity: 0.07,
+                                color: { value: accentColor }
+                            }
+                        },
+                        move: {
+                            enable: true,
+                            speed: 1,
+                            direction: "none",
+                            random: true,
+                            straight: false,
+                            outModes: "out",
+                             attract: {
+                                enable: false, // Disabled attract for a cleaner light theme look, can be enabled
+                                rotateX: 600,
+                                rotateY: 1200
+                            },
+                            trail: {
+                                enable: false, // Disabled trail for cleaner light theme look
+                                // length: 3,
+                                // fill: { color: heroBgColor }
+                            }
+                        },
+                         collisions: {
+                            enable: true,
+                            mode: "bounce"
+                        }
+                    },
+                    interactivity: {
+                        events: {
+                            onHover: {
+                                enable: true,
+                                mode: ["grab", "bubble"]
+                            },
+                            onClick: {
+                                enable: true,
+                                mode: "push"
+                            }
+                        },
+                        modes: {
+                            grab: {
+                                distance: 130,
+                                links: {
+                                    opacity: 0.5
+                                }
+                            },
+                            bubble: {
+                                distance: 160,
+                                size: 10,
+                                duration: 2,
+                                opacity: 0.7,
+                            },
+                            push: {
+                                quantity: 3
+                            }
+                        }
+                    },
+                    detectRetina: true,
+                    background: {
+                        color: "transparent"
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
